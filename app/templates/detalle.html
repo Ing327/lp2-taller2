@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block titulo %}{# TODO: muestra producto.nombre #} - Tienda Virtual{% endblock %}
+
+{% block contenido %}
+<div class="detalle-producto">
+
+    {# TODO 1: Imagen del producto:
+       <img src="{{ url_for('static', filename=producto.foto) }}" alt="..."> #}
+
+    {# TODO 2: Nombre en un <h2> #}
+
+    {# TODO 3: Marca, SKU y categoría (producto.categoria.nombre) #}
+
+    {# TODO 4: Precio formateado:
+       <p>${{ "{:,.0f}".format(producto.precio) }}</p> #}
+
+    {# TODO 5: Muestra las unidades en stock (producto.stock) y un mensaje
+       distinto según producto.disponible sea True o False. #}
+
+    <p><a href="{{ url_for('main.index') }}">&larr; Volver al catálogo</a></p>
+</div>
+{% endblock %}
