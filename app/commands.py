@@ -1,74 +1,95 @@
-"""
-Comandos personalizados de terminal (Flask CLI).
-
-Permiten ejecutar tareas administrativas desde la terminal, por ejemplo:
-
-    flask init-db     -> crea las tablas en la base de datos
-    flask seed-db     -> carga los productos del JSON a la base de datos
-
-Estos comandos se registran en create_app().
-"""
-
 import json
 import os
 
 import click
+from flask import current_app
 
 from .extensions import db
 from .models import Categoria, Producto
 
-RUTA_PRODUCTOS = os.path.join(os.path.dirname(__file__), "data", "productos.json")
+
+@click.command("init-db")
+def init_db():
+    """Crea las tablas de la base de datos."""
+    db.create_all()
+
+    click.echo("Base de datos inicializada correctamente.")
 
 
-def registrar_comandos(app):
-    """Asocia los comandos a la aplicación Flask recibida."""
+@click.command("reset-db")
+def reset_db():
+    """Borra todas las tablas y las vuelve a crear."""
+    db.drop_all()
+    db.create_all()
 
-    @app.cli.command("init-db")
-    def init_db():
-        """Crea todas las tablas definidas en models.py."""
-        # TODO 1: Llama a db.create_all() para crear las tablas.
-        # TODO 2: Muestra un mensaje de confirmación con click.echo(...)
-        pass
+    click.echo("Base de datos reiniciada correctamente.")
 
-    @app.cli.command("reset-db")
-    def reset_db():
-        """Borra y vuelve a crear todas las tablas (¡pierde los datos!)."""
-        # TODO 3: Llama a db.drop_all() y luego a db.create_all()
-        # TODO 4: Muestra un mensaje de confirmación
-        pass
 
-    @app.cli.command("seed-db")
-    def seed_db():
-        """Carga los productos de productos.json en la base de datos."""
+@click.command("seed-db")
+def seed_db():
+    """Carga los productos desde productos.json."""
+    
+    ruta = os.path.join(
+        current_app.root_path,
+        "data",
+        "productos.json"
+    )
 
-        # --- Leer el archivo JSON -------------------------------------
-        # TODO 5: Abre RUTA_PRODUCTOS con encoding="utf-8" y usa
-        #         json.load() para obtener la lista de productos.
-        # datos = ...
+    try:
+        with open(ruta, "r", encoding="utf-8") as archivo:
+            productos = json.load(archivo)
 
-        # --- Insertar categorías y productos --------------------------
-        # Por cada producto del JSON debes:
-        #
-        # TODO 6: Buscar si su categoría ya existe en la base de datos:
-        #         categoria = Categoria.query.filter_by(
-        #             nombre=item["categoria"]).first()
-        #
-        # TODO 7: Si no existe, crearla y agregarla a la sesión:
-        #         categoria = Categoria(nombre=item["categoria"])
-        #         db.session.add(categoria)
-        #         db.session.flush()   # asigna el id sin confirmar aún
-        #
-        # TODO 8: Evitar duplicados: si ya existe un Producto con ese sku
-        #         (Producto.query.filter_by(sku=item["sku"]).first()),
-        #         saltarlo con 'continue'.
-        #
-        # TODO 9: Crear el objeto Producto con los datos del JSON y
-        #         asignarle categoria_id=categoria.id, luego
-        #         db.session.add(producto)
+        for datos in productos:
 
-        # --- Confirmar la transacción ---------------------------------
-        # TODO 10: Llama a db.session.commit() para guardar TODO de una
-        #          vez. Hasta este momento nada se ha escrito en disco.
+            # Buscar si el producto ya existe
+            producto_existente = Producto.query.filter_by(
+                sku=datos["sku"]
+            ).first()
 
-        # TODO 11: Muestra cuántos productos se cargaron con click.echo(...)
-        pass
+            if producto_existente:
+                click.echo(
+                    f"SKU {datos['sku']} ya existe. Se omite."
+                )
+                continue
+
+            # Buscar la categoría
+            categoria = Categoria.query.filter_by(
+                nombre=datos["categoria"]
+            ).first()
+
+            # Si no existe, crearla
+            if categoria is None:
+                categoria = Categoria(
+                    nombre=datos["categoria"]
+                )
+
+                db.session.add(categoria)
+
+                # Envía el INSERT para obtener el ID
+                db.session.flush()
+
+            # Crear el producto
+            producto = Producto(
+                sku=datos["sku"],
+                marca=datos["marca"],
+                nombre=datos["nombre"],
+                precio=datos["precio"],
+                foto=datos.get("foto"),
+                stock=datos.get("stock", 0),
+                activo=datos.get("activo", True),
+                categoria_id=categoria.id
+            )
+
+            db.session.add(producto)
+
+        # Guardar todo de una sola vez
+        db.session.commit()
+
+        click.echo("Productos cargados correctamente.")
+
+    except Exception as error:
+        db.session.rollback()
+
+        click.echo(
+            f"Error al cargar los productos: {error}"
+        )
