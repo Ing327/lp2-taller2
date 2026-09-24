@@ -1,23 +1,30 @@
 {% extends "base.html" %}
 
-{% block titulo %}Categorías - Tienda Virtual{% endblock %}
+{% block titulo %}
+Categorías
+{% endblock %}
 
 {% block contenido %}
+
+<h1>Categorías</h1>
+
 <div class="lista-categorias">
-    <h2>Categorías</h2>
 
-    <ul>
-    {# TODO 1: Recorre 'categorias' con un ciclo for. #}
+    {% for categoria in categorias %}
+        <div class="categoria">
+            <h2>{{ categoria.nombre }}</h2>
 
-    {# TODO 2: Por cada una muestra su nombre y, entre paréntesis, cuántos
-       productos tiene. Gracias al backref puedes contar así:
-           {{ categoria.productos|length }}
+            <p>
+                Productos disponibles:
+                {{ categoria.productos|length }}
+            </p>
 
-       Y enlázala al catálogo filtrado:
-           <a href="{{ url_for('main.index', categoria=categoria.id) }}">...</a>
-    #}
+            <a href="{{ url_for('main.index', categoria=categoria.id) }}">
+                Ver productos
+            </a>
+        </div>
+    {% endfor %}
 
-    {# TODO 3: Cierra el ciclo con {% endfor %} #}
-    </ul>
 </div>
+
 {% endblock %}

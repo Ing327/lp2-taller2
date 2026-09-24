@@ -1,98 +1,287 @@
-/* Estilos base de la Tienda Virtual */
-
-body {
-    font-family: Arial, sans-serif;
+* {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    background-color: #f5f5f5;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f4f6f8;
     color: #222;
 }
 
-header {
+.contenedor {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.header {
     background-color: #1f2937;
     color: white;
-    padding: 1rem 2rem;
+    padding: 25px 0;
 }
 
-.catalogo {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 1.5rem;
-    padding: 2rem;
-}
-
-.tarjeta-producto {
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
-    padding: 1rem;
+.header h1 {
     text-align: center;
-}
-
-.tarjeta-producto img {
-    max-width: 100%;
-    height: 160px;
-    object-fit: contain;
-}
-
-.detalle-producto {
-    max-width: 700px;
-    margin: 2rem auto;
-    background: white;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
-}
-
-/* TODO: agrega o modifica estilos a tu gusto (colores, tipografía, etc.) */
-
-/* ---- Estilos nuevos del Taller 2 ---- */
-
-header a {
-    color: white;
-    text-decoration: none;
-    margin-right: 1rem;
-}
-
-nav {
-    margin-top: 0.5rem;
-    font-size: 0.9rem;
-}
-
-.filtros {
-    padding: 1.5rem 2rem 0;
-}
-
-.chip {
-    display: inline-block;
-    padding: 0.35rem 0.9rem;
-    margin-right: 0.5rem;
-    border-radius: 999px;
-    background: #e5e7eb;
-    color: #374151;
-    text-decoration: none;
-    font-size: 0.85rem;
-}
-
-.chip-activo {
-    background: #1f2937;
-    color: white;
-}
-
-.agotado {
-    color: #b91c1c;
+    font-size: 42px;
     font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+}
+
+.header nav {
+    display: flex;
+    justify-content: center;
+    gap: 35px;
+}
+
+.header nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.header nav a:hover {
+    color: #60a5fa;
+}
+
+.contenido {
+    padding-top: 35px;
+    padding-bottom: 50px;
+}
+
+.contenido h1 {
+    color: #1f2937;
+    font-size: 32px;
+    margin-bottom: 25px;
+}
+
+.filtro {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.filtro label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.filtro select {
+    padding: 9px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+.boton {
+    display: inline-block;
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    padding: 9px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 15px;
+    margin-left: 5px;
+}
+
+.boton:hover {
+    background-color: #1d4ed8;
+}
+
+.boton-secundario {
+    display: inline-block;
+    background-color: #6b7280;
+    color: white;
+    padding: 9px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    margin-left: 5px;
+}
+
+.boton-secundario:hover {
+    background-color: #4b5563;
+}
+
+.productos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.producto {
+    background-color: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.10);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.producto:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.producto img {
+    display: block;
+    width: 100%;
+    height: 220px;
+    object-fit: contain;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    background-color: #f8fafc;
+}
+
+.producto h2 {
+    color: #1f2937;
+    font-size: 21px;
+    margin-bottom: 12px;
+}
+
+.producto p {
+    margin-bottom: 8px;
+    color: #4b5563;
+}
+
+.producto .precio {
+    color: #2563eb;
+    font-size: 23px;
+    font-weight: bold;
+    margin: 15px 0;
+}
+
+.estado {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 10px 0 15px;
 }
 
 .disponible {
-    color: #15803d;
+    background-color: #dcfce7;
+    color: #166534;
+}
+
+.agotado {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+.detalle {
+    display: inline-block;
+    background-color: #2563eb;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 6px;
+    text-decoration: none;
     font-weight: bold;
+    margin-top: 5px;
+}
+
+.detalle:hover {
+    background-color: #1d4ed8;
+}
+
+.sin-imagen {
+    width: 100%;
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f1f5f9;
+    color: #64748b;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.footer {
+    background-color: #1f2937;
+    color: white;
+    text-align: center;
+    padding: 25px 0;
+}
+
+@media (max-width: 900px) {
+    .productos {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .productos {
+        grid-template-columns: 1fr;
+    }
+
+    .header h1 {
+        font-size: 26px;
+    }
+
+    .header nav {
+        gap: 15px;
+    }
 }
 
 .lista-categorias {
-    max-width: 700px;
-    margin: 2rem auto;
-    background: white;
-    padding: 2rem;
-    border-radius: 8px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.categoria {
+    background-color: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.10);
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.categoria:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.categoria h2 {
+    color: #1f2937;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.categoria p {
+    color: #4b5563;
+    margin-bottom: 20px;
+}
+
+.categoria a {
+    display: inline-block;
+    background-color: #2563eb;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.categoria a:hover {
+    background-color: #1d4ed8;
+}
+
+@media (max-width: 900px) {
+    .lista-categorias {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .lista-categorias {
+        grid-template-columns: 1fr;
+    }
 }
