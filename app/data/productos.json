@@ -1,32 +1,92 @@
 [
-  {
-    "sku": "TEC-001",
-    "marca": "Logitech",
-    "nombre": "Mouse inalámbrico MX Master",
-    "precio": 349900,
-    "foto": "images/mouse-mx-master.jpg",
-    "stock": 12,
-    "activo": true,
-    "categoria": "Periféricos"
-  },
-  {
-    "sku": "TEC-002",
-    "marca": "Kingston",
-    "nombre": "Memoria USB 64GB",
-    "precio": 39900,
-    "foto": "images/usb-kingston-64gb.jpg",
-    "stock": 40,
-    "activo": true,
-    "categoria": "Almacenamiento"
-  },
-  {
-    "sku": "AUD-001",
-    "marca": "Sony",
-    "nombre": "Audífonos WH-1000XM4",
-    "precio": 1199000,
-    "foto": "images/audifonos-sony.jpg",
-    "stock": 0,
-    "activo": true,
-    "categoria": "Audio"
-  }
+    {
+        "sku": "AUD-001",
+        "marca": "Sony",
+        "nombre": "Audífonos WH-1000XM4",
+        "precio": 1199000,
+        "foto": "images/audifonos-sony.jpg",
+        "stock": 0,
+        "activo": true,
+        "categoria": "Audio"
+    },
+    {
+        "sku": "AUD-002",
+        "marca": "JBL",
+        "nombre": "Parlante JBL Flip 6",
+        "precio": 549900,
+        "foto": "images/parlante-jbl.jpg",
+        "stock": 8,
+        "activo": true,
+        "categoria": "Audio"
+    },
+    {
+        "sku": "AUD-003",
+        "marca": "Samsung",
+        "nombre": "Galaxy Buds FE",
+        "precio": 399900,
+        "foto": "images/galaxy-buds.jpg",
+        "stock": 12,
+        "activo": true,
+        "categoria": "Audio"
+    },
+    {
+        "sku": "COM-001",
+        "marca": "Logitech",
+        "nombre": "Mouse inalámbrico MX Master 3S",
+        "precio": 449900,
+        "foto": "images/mx-master-3s.jpg",
+        "stock": 6,
+        "activo": true,
+        "categoria": "Computación"
+    },
+    {
+        "sku": "COM-002",
+        "marca": "Logitech",
+        "nombre": "Teclado inalámbrico K380",
+        "precio": 189900,
+        "foto": "images/teclado-k380.jpg",
+        "stock": 10,
+        "activo": true,
+        "categoria": "Computación"
+    },
+    {
+        "sku": "COM-003",
+        "marca": "HP",
+        "nombre": "Monitor HP 24 pulgadas",
+        "precio": 699900,
+        "foto": "images/monitor-hp-24.jpg",
+        "stock": 4,
+        "activo": true,
+        "categoria": "Computación"
+    },
+    {
+        "sku": "GAM-001",
+        "marca": "Razer",
+        "nombre": "Mouse Gamer DeathAdder V2",
+        "precio": 249900,
+        "foto": "images/razer-deathadder.jpg",
+        "stock": 0,
+        "activo": true,
+        "categoria": "Gaming"
+    },
+    {
+        "sku": "GAM-002",
+        "marca": "HyperX",
+        "nombre": "Teclado Gamer Alloy Origins",
+        "precio": 399900,
+        "foto": "images/hyperx-alloy.jpg",
+        "stock": 7,
+        "activo": true,
+        "categoria": "Gaming"
+    },
+    {
+        "sku": "CEL-001",
+        "marca": "Samsung",
+        "nombre": "Galaxy A55",
+        "precio": 1499900,
+        "foto": "images/galaxy-a55.jpg",
+        "stock": 5,
+        "activo": true,
+        "categoria": "Celulares"
+    }
 ]
