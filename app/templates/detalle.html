@@ -1,23 +1,64 @@
 {% extends "base.html" %}
 
-{% block titulo %}{# TODO: muestra producto.nombre #} - Tienda Virtual{% endblock %}
+{% block titulo %}
+{{ producto.nombre }} - Tienda Virtual
+{% endblock %}
 
 {% block contenido %}
+
 <div class="detalle-producto">
 
-    {# TODO 1: Imagen del producto:
-       <img src="{{ url_for('static', filename=producto.foto) }}" alt="..."> #}
+    {% if producto.foto %}
+        <img
+            src="{{ url_for('static', filename=producto.foto) }}"
+            alt="{{ producto.nombre }}"
+        >
+    {% endif %}
 
-    {# TODO 2: Nombre en un <h2> #}
+    <div class="informacion-producto">
 
-    {# TODO 3: Marca, SKU y categoría (producto.categoria.nombre) #}
+        <h1>{{ producto.nombre }}</h1>
 
-    {# TODO 4: Precio formateado:
-       <p>${{ "{:,.0f}".format(producto.precio) }}</p> #}
+        <p>
+            <strong>Marca:</strong>
+            {{ producto.marca }}
+        </p>
 
-    {# TODO 5: Muestra las unidades en stock (producto.stock) y un mensaje
-       distinto según producto.disponible sea True o False. #}
+        <p>
+            <strong>SKU:</strong>
+            {{ producto.sku }}
+        </p>
 
-    <p><a href="{{ url_for('main.index') }}">&larr; Volver al catálogo</a></p>
+        <p>
+            <strong>Categoría:</strong>
+            {{ producto.categoria.nombre }}
+        </p>
+
+        <p class="precio">
+            ${{ "{:,.0f}".format(producto.precio) }}
+        </p>
+
+        <p>
+            <strong>Stock:</strong>
+            {{ producto.stock }}
+        </p>
+
+        {% if producto.disponible %}
+            <p class="estado disponible">
+                Disponible
+            </p>
+        {% else %}
+            <p class="estado agotado">
+                Agotado
+            </p>
+        {% endif %}
+
+        <a href="{{ url_for('main.index') }}" class="boton-volver">
+            ← Volver al catálogo
+        </a>
+
+    </div>
+
 </div>
+
 {% endblock %}
