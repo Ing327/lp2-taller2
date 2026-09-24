@@ -8,6 +8,30 @@ Catálogo de productos
 
 <h1>Catálogo de productos</h1>
 
+<div class="busqueda-sku">
+
+    <form method="GET" action="{{ url_for('main.buscar') }}">
+
+        <label for="sku">
+            Buscar producto por SKU:
+        </label>
+
+        <input
+            type="text"
+            id="sku"
+            name="sku"
+            placeholder="Ejemplo: AUD-001"
+            required
+        >
+
+        <button type="submit" class="boton">
+            Buscar
+        </button>
+
+    </form>
+
+</div>
+
 <div class="filtro">
 
     <form method="GET" action="{{ url_for('main.index') }}">
@@ -52,7 +76,6 @@ Catálogo de productos
 
 </div>
 
-
 <div class="productos">
 
     {% for producto in productos %}
@@ -74,40 +97,33 @@ Catálogo de productos
 
             {% endif %}
 
-
             <h2>
                 {{ producto.nombre }}
             </h2>
-
 
             <p>
                 <strong>Marca:</strong>
                 {{ producto.marca }}
             </p>
 
-
             <p>
                 <strong>SKU:</strong>
                 {{ producto.sku }}
             </p>
 
-
             <p class="precio">
                 ${{ "{:,.0f}".format(producto.precio) }}
             </p>
-
 
             <p>
                 <strong>Stock:</strong>
                 {{ producto.stock }}
             </p>
 
-
             <p>
                 <strong>Categoría:</strong>
                 {{ producto.categoria.nombre }}
             </p>
-
 
             {% if producto.disponible %}
 
@@ -123,9 +139,7 @@ Catálogo de productos
 
             {% endif %}
 
-
             <br>
-
 
             <a
                 href="{{ url_for('main.detalle', sku=producto.sku) }}"
